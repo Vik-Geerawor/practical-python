@@ -1,0 +1,21 @@
+{
+    "version": 1,
+    "formatters": {
+        "default": {
+            "format": "%(asctime)s [%(levelname)s] %(name)s:%(lineno)d - %(message)s"
+        }
+    },
+    "handlers": {
+        "logfile": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "formatter": "default",
+            "filename": "../logs/application.log",
+            "when": "D",
+            "backupCount": 30
+        }
+    },
+    "root": {
+        "handlers": ["logfile"],
+        "level": "INFO"
+    }
+}
