@@ -32,10 +32,10 @@ def run():
 
         total_paid = total_paid + payment
 
-        print(month, round(total_paid, 2), round(principal, 2))
+        print(f'{month:>5d} {round(total_paid, 2):>10.2f} {round(principal, 2):>10.2f}')
 
-    print('Total paid', round(total_paid, 2))
-    print('Months', month)
+    print(f'Total paid {round(total_paid, 2):>10.2f}')
+    print(f'Months {month:>5d}')
 
     text = "False"
     print('text = ', text)
