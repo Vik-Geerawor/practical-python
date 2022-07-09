@@ -4,6 +4,7 @@
 import sys
 import csv
 import logging
+import pcost
 
 logger = logging.getLogger(__name__)
 
@@ -31,6 +32,7 @@ def read_portfolio(filename):
 
                     # list of dicts
                     portfolio.append(dict(zip(headers, [name, shares, price])))
+                    logger.info('%s, %d, %.2f', name, shares, price)
                 except ValueError:
                     print(f'Bad data')
                     continue
@@ -45,6 +47,7 @@ def read_prices(filename):
     Reads stock prices from a file and
     returns a dictionary contains prices of shares
     """
+    logger.info('Reading price data from file %s', filename)
     prices = {}
     try:
         with open(filename, 'rt') as f:
@@ -61,3 +64,22 @@ def read_prices(filename):
         logger.error('File not found: %s', filename)
 
     return prices
+
+
+def calculate_pnl():
+    total_cost = pcost.portfolio_cost('Data/portfolio.csv')
+    logger.info('Portfolio cost: %.2f', total_cost)
+
+    portfolio = read_portfolio('Data/portfolio.csv')
+    prices = read_prices('Data/prices.csv')
+
+    pv = 0.0
+    for holding in portfolio:
+        name = holding['name']
+        if name in prices:
+            logger.info('%s: price - old %.2f new %.2f', name, holding['price'], prices[name])
+            pv += holding['shares'] * prices[name]
+    logger.info('PV of portfolio %.2f', pv)
+    pnl = pv - total_cost
+    print(f'Daily PnL: {pnl:.2f}')
+    logger.info('Daily PnL %.2f', pnl)

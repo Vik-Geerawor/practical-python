@@ -26,7 +26,6 @@ def portfolio_cost(filename):
                     name = row[0]
                     shares = int(row[1])
                     price = float(row[2])
-                    logger.info('%s, %d, %f', name, shares, price)
                 except ValueError:
                     print(f'Bad data')
                     logger.error('Bad data in file %s', filename)
