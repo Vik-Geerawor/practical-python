@@ -17,9 +17,10 @@ if __name__ == '__main__':
     # total_cost = pcost.portfolio_cost('Data/portfolio.csv')
     # logger.info('Portfolio cost: %.2f', total_cost)
 
-    # portfolio = report.read_portfolio('Data/portfolio.csv')
+    portfolio = report.read_portfolio('Data/portfolio.csv')
+
     # prices = report.read_prices('Data/prices.csv')
 
-    report.calculate_pnl()
+    # report.calculate_pnl()
 
 # https://dabeaz-course.github.io/practical-python/Notes/02_Working_with_data/03_Formatting.html
